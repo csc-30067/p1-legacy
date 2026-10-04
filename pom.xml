@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- Project Information -->
+  <!-- Project information -->
   <groupId>uk.ac.keele.csc30067</groupId>
   <artifactId>payroll</artifactId>
   <version>1.0</version>
+
   <name>Payroll</name>
   <description>Using legacy code for managing employees on a payroll.</description>
 
@@ -17,8 +20,7 @@
     <maven.compiler.release>${java.version}</maven.compiler.release>
   </properties>
 
-  <!-- The legacy library is shipped inside this project, in the "repo" folder.
-       Maven treats it like any other repository, so no manual install is needed. -->
+  <!-- The legacy library is shipped inside this project, in the repo folder. -->
   <repositories>
     <repository>
       <id>project-local</id>
@@ -29,23 +31,23 @@
   <!-- Dependencies -->
   <dependencies>
     <dependency>
-      <!-- These coordinates must match the pom used to build the legacy jar -->
       <groupId>uk.ac.keele.csc30067.legacy</groupId>
       <artifactId>legacypayroll</artifactId>
       <version>1.0.0</version>
     </dependency>
   </dependencies>
 
-  <!-- Build Configuration -->
   <build>
     <plugins>
+
+      <!-- Compile the project for Java 17. -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.15.0</version>
       </plugin>
 
-      <!-- Maven Exec Plugin: "mvn exec:java" runs Practical1 -->
+      <!-- Run the Practical1 class with: mvn exec:java -->
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
@@ -55,43 +57,80 @@
         </configuration>
       </plugin>
 
-      <!-- "mvn site" generates Javadoc for the students' own code only.
-           Documentation for the legacy classes is provided in the legacy-docs folder. -->
+      <!-- Generate Javadoc and UML diagrams with: mvn javadoc:javadoc -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.12.0</version>
+        <configuration>
+          <doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
+
+          <docletArtifact>
+            <groupId>nl.talsmasoftware</groupId>
+            <artifactId>umldoclet</artifactId>
+            <version>2.1.2</version>
+          </docletArtifact>
+
+          <!-- Generate PlantUML source files as well as the HTML diagrams. -->
+          <additionalOptions>
+            <additionalOption>--create-puml-files</additionalOption>
+          </additionalOptions>
+        </configuration>
+      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>3.5.0</version>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <version>3.12.1</version>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.12.0</version>
-      </plugin>
+
     </plugins>
   </build>
 
   <reporting>
     <plugins>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
         <version>3.5.0</version>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.12.1</version>
-      </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>3.12.0</version>
+
+        <configuration>
+          <doclet>nl.talsmasoftware.umldoclet.UMLDoclet</doclet>
+
+          <docletArtifact>
+            <groupId>nl.talsmasoftware</groupId>
+            <artifactId>umldoclet</artifactId>
+            <version>2.1.2</version>
+          </docletArtifact>
+
+          <additionalOptions>
+            <additionalOption>--create-puml-files</additionalOption>
+          </additionalOptions>
+        </configuration>
+
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
+
     </plugins>
   </reporting>
+
 </project>
