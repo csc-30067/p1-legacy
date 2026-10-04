@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Tue Sep 29 16:56:35 BST 2026
+legacypayroll-1.0.0.jar>=
+legacypayroll-1.0.0-javadoc.jar>=
+legacypayroll-1.0.0.pom>=

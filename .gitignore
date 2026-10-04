@@ -1,0 +1,26 @@
+# Files/directories that will not be tracked by git
+
+# macOS
+.DS_Store
+
+# IDEs and editors
+.vscode/
+.classpath
+.project
+.settings/
+
+# Java / Maven / Gradle build output
+target/
+build/
+.gradle/
+
+# Local Java version selection
+.java-version
+
+# Generated Java-modernisation logs
+.github/modernize/java-upgrade/hooks/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
