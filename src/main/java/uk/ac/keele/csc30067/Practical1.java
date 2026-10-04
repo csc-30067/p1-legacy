@@ -49,11 +49,11 @@ public class Practical1 {
 
         // Now try to add a new employee, using the new class you created
         // A new "minimum wage" employee
-        // Employee e4 = new MinimumWageEmployee("Fatima",
-        //         "Al-Mansoori",
-        //         "ABC-DEFG-HIJ",
-        //         22, 40);
-        // employees.add(e4);
+        Employee e4 = new MinimumWageEmployee("Fatima",
+                "Al-Mansoori",
+                "ABC-DEFG-HIJ",
+                22, 40);
+        employees.add(e4);
 
         // print all employees
         // this will use the toString() method of the Employee class (or its subclasses)
@@ -67,6 +67,18 @@ public class Practical1 {
         // Now, try to use a different data structure to hold the employees
         // Add all previous objects to the new data structure and print them
 
-        // TODO: add your code here
+        // TO DO: add your code here
+        ArrayDeque<Employee> fifoEmployees = new ArrayDeque<>();
+        fifoEmployees.push(e1);
+        fifoEmployees.push(e2);
+        fifoEmployees.push(e3);
+        fifoEmployees.push(e4);
+
+        System.out.println("FIFO printout:");
+        while (!fifoEmployees.isEmpty()) {
+            Employee e = fifoEmployees.pop();
+            System.out.println(e);
+        }
+
     }
 }

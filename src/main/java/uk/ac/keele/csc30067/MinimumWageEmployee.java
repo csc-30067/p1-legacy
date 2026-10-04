@@ -27,6 +27,7 @@ import uk.ac.keele.csc30067.legacy.HourlyEmployee;
  */
 public class MinimumWageEmployee extends HourlyEmployee {
     // TODO: add private attributes as needed
+    private int age;
 
     /**
      * Constructor for the class representing an employee with a minimum wage
@@ -46,7 +47,8 @@ public class MinimumWageEmployee extends HourlyEmployee {
     public MinimumWageEmployee(String firstName, String lastName, String socialSecurityNumber, int age, double hours) {
         super(firstName, lastName, socialSecurityNumber, 0.0, hours);
 
-        // TODO: add your code here to set the wage based on the age
+        this.age = age;
+        this.setWage(age);
     }
 
     /**
@@ -66,9 +68,15 @@ public class MinimumWageEmployee extends HourlyEmployee {
         }
         double wage = 0.0;
         
-        // TODO: add your code here to compute the wage as per requirements (based on the age)
-        
-        // remember to set the wage using the setter in the parent class
+        // TODO: compute the wage as per requirements (based on the age)
+        if (age <= 20) {
+            wage = 7.49;
+        } else if (age <= 22) {
+            wage = 10.18;
+        } else {
+            wage = 10.42;
+        }
+       
         super.setWage(wage);
     }
 
@@ -96,7 +104,7 @@ public class MinimumWageEmployee extends HourlyEmployee {
      */
     public int getAge() {
         // TODO: fix as appropriate
-        return 0;
+        return age;
     }
 
     /**
